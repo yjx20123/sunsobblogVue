@@ -1,6 +1,5 @@
 import VueRouter from "vue-router";
 import Vue from "vue";
-import Info from "@/page/user/info";
 
 Vue.use(VueRouter);
 //导入的内容
@@ -31,8 +30,12 @@ const restpassword = () => import("@/page/user/rest-password")
 const baseView = () => import("@/layout/base-view")
 const rightView = () => import("@/layout/right-content")
 const routes = [{
-    path: '', component: baseView, redirect: '/index', children: [{
+    path: '', component: baseView, redirect: '/index',
+
+    children: [{
         path: "/index", component: index
+    },{
+        path: "/login", component: login
     }, {
         path: "/content", component: rightView, children: [{
             path: "post-article", component: postArticle
@@ -43,46 +46,29 @@ const routes = [{
         }, {
             path: "manage-artilce", component: articleManage
         }]
+
     }, {
-        path: "/user",
-        component: rightView,
-        children: [{
-            path: "email",
-            component: email
+        path: "/user", component: rightView, children: [{
+            path: "email", component: email
         }, {
-            path: "info",
-            component: info
+            path: "info", component: info
         }, {
-            path: "list",
-            component: list
-        },
-            {
-                path: "restpassword",
-                component: restpassword
-            }
-        ]
+            path: "list", component: list
+        }, {
+            path: "restpassword", component: restpassword
+        }]
     }, {
-        path: "/opertaion",
-        component: rightView,
-        children: [{
-            path: "loop",
-            component: loop
+        path: "/opertaion", component: rightView, children: [{
+            path: "loop", component: loop
         }, {
-            path: "category",
-            component: categoryManage
-        }
-        ]
+            path: "category", component: categoryManage
+        }]
     }, {
-        path: "/setting",
-        component: rightView,
-        children: [{
-            path: "friendlink",
-            component: friendLink
+        path: "/setting", component: rightView, children: [{
+            path: "friendlink", component: friendLink
         }, {
-            path: "websizeinfo",
-            component: websizeinfo
-        }
-        ]
+            path: "websizeinfo", component: websizeinfo
+        }]
     }]
 }
 
