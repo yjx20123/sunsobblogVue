@@ -29,50 +29,54 @@ const restpassword = () => import("@/page/user/rest-password")
 //布局
 const baseView = () => import("@/layout/base-view")
 const rightView = () => import("@/layout/right-content")
-const routes = [{
+const routes = [
+    {
+        path: "/login", component: login
+    },
+    {
     path: '', component: baseView, redirect: '/index',
 
     children: [{
-        path: "/index", component: index
-    },{
-        path: "/login", component: login
+        path: "/index",hidden:false, name: "首页", icon: "el-icon-s-home", component: index
     }, {
-        path: "/content", component: rightView, children: [{
-            path: "post-article", component: postArticle
+        path: "/content",hidden:false,name: "运营", icon: "el-icon-goods", component: rightView, children: [{
+            path: "post-article",hidden:false,name: "添加文章", icon: "el-icon-notebook-2",  component: postArticle
         }, {
-            path: "manage-comment", component: commentMange
+            path: "manage-comment",hidden:false,name: "评论管理", icon: "el-icon-s-comment",  component: commentMange
         }, {
-            path: "manage-image", component: imageManage
+            path: "manage-image",hidden:false,name: "图片管理", icon: "el-icon-picture-outline",  component: imageManage
         }, {
-            path: "manage-artilce", component: articleManage
+            path: "manage-artilce",hidden:false,name: "文章管理", icon: "el-icon-pie-chart",  component: articleManage
         }]
 
     }, {
-        path: "/user", component: rightView, children: [{
-            path: "email", component: email
+        path: "/user",hidden:false,name: "用户", icon: "el-icon-user-solid", component: rightView, children: [{
+            path: "email",hidden:false,name: "邮箱", icon: "el-icon-folder-remove", component: email
         }, {
-            path: "info", component: info
+            path: "info",hidden:false,name: "用户信息", icon: "el-icon-user", component: info
         }, {
-            path: "list", component: list
+            path: "list",hidden:false,name: "用户列表", icon: "el-icon-user", component: list
         }, {
-            path: "restpassword", component: restpassword
+            path: "restpassword",hidden:false,name: "重置密码", icon: "el-icon-bell", component: restpassword
         }]
     }, {
-        path: "/opertaion", component: rightView, children: [{
-            path: "loop", component: loop
+        path: "/opertaion",hidden:false,name: "管理", icon: "el-icon-s-platform", component: rightView, children: [{
+            path: "loop",hidden:false,name: "轮播图", icon: "el-icon-picture-outline-round", component: loop
         }, {
-            path: "category", component: categoryManage
+            path: "category",hidden:false,name: "分类", icon: "el-icon-s-management", component: categoryManage
         }]
     }, {
-        path: "/setting", component: rightView, children: [{
-            path: "friendlink", component: friendLink
+        path: "/setting",hidden:false,name: "设置", icon: "el-icon-s-tools", component: rightView, children: [{
+            path: "friendlink",hidden:false,name: "友情链接", icon: "el-icon-service", component: friendLink
         }, {
-            path: "websizeinfo", component: websizeinfo
+            path: "websizeinfo",hidden:false,name: "站点信息", icon: "el-icon-map-location", component: websizeinfo
         }]
     }]
 }
 
 ]
+
+
 const router = new VueRouter({
     routes: [...routes]
 });

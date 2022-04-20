@@ -1,64 +1,56 @@
 <template>
   <div>
     <el-menu
-        default-active="2"
-        class="el-menu-vertical-demo">
+        default-active="1-1"
+        unique-opened="true"
+        class="el-menu-vertical">
+      <template v-for="(item,index) in menulist">
+        <router-link :to="item.path" v-if="!item.children&&!item.hidden" :key="index">
+          <el-menu-item :index="index">
+            <i :class="item.icon"></i>
+            <span slot="title">{{ item.name }}</span>
+          </el-menu-item>
+        </router-link>
 
+        <el-submenu v-if="item.children&&!item.hidden" :key="index" :index="index">
+          <template slot="title">
+            <i :class="item.icon"></i>
+            <span>{{ item.name }}</span>
+          </template>
+          <router-link :to="item.path+'/'+subItem.path" v-for="(subItem,subIndex) in item.children">
+            <el-menu-item :index="index+'-'+subIndex" :key="subIndex">
+              <i :class="subItem.icon"></i>
+              <span slot="title" v-text="subItem.name"></span>
+            </el-menu-item>
+          </router-link>
 
-      <el-menu-item index="1">
-        <i class="el-icon-s-home"></i>
-        <span slot="title">首页</span>
-      </el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>运营</span>
-        </template>
-        <el-menu-item index="2-1">
-          <i class="el-icon-s-home"></i>
-          <span slot="title">子导航1</span>
-        </el-menu-item>
-        <el-menu-item index="2-2">
-          <i class="el-icon-s-home"></i>
-          <span slot="title">子导航2</span>
-        </el-menu-item>
-        <el-menu-item index="2-3">
-          <i class="el-icon-s-home"></i>
-          <span slot="title">子导航3</span>
-        </el-menu-item>
-      </el-submenu>
-      <el-submenu index="3">
-        <template slot="title">
-          <i class="el-icon-s-custom"></i>
-          <span>用户</span>
-        </template>
-        <el-menu-item index="3-1">
-          <i class="el-icon-s-home"></i>
-          <span slot="title">子导航1</span>
-        </el-menu-item>
-        <el-menu-item index="3-2">
-          <i class="el-icon-s-home"></i>
-          <span slot="title">子导航2</span>
-        </el-menu-item>
-        <el-menu-item index="3-3">
-          <i class="el-icon-s-home"></i>
-          <span slot="title">子导航3</span>
-        </el-menu-item>
-      </el-submenu>
+        </el-submenu>
+      </template>
     </el-menu>
   </div>
 </template>
 
 <script>
 import routes from "@/router/routes";
+
+const menulist = routes.options.routes
 export default {
   name: "left-menu",
+
+  data: () => {
+    return {
+      menulist: routes.options.routes[1].children
+    }
+  },
   mounted() {
-    console.log(routes)
+    console.log(menulist[1].children)
   }
+
 }
 </script>
 
 <style scoped>
-
+.el-menu-vertical a {
+  text-decoration: none;
+}
 </style>
