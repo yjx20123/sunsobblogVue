@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-menu
-        default-active="1-1"
+        default-active="0"
         unique-opened="true"
         class="el-menu-vertical">
       <template v-for="(item,index) in menulist">
@@ -18,12 +18,11 @@
             <span>{{ item.name }}</span>
           </template>
           <router-link :to="item.path+'/'+subItem.path" v-for="(subItem,subIndex) in item.children">
-            <el-menu-item :index="index+'-'+subIndex" :key="subIndex">
+            <el-menu-item :index="index+'-'+subIndex" :key="subIndex" v-if="!subItem.hidden">
               <i :class="subItem.icon"></i>
               <span slot="title" v-text="subItem.name"></span>
             </el-menu-item>
           </router-link>
-
         </el-submenu>
       </template>
     </el-menu>
@@ -43,7 +42,6 @@ export default {
     }
   },
   mounted() {
-    console.log(menulist[1].children)
   }
 
 }

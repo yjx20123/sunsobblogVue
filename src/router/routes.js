@@ -29,6 +29,7 @@ const restpassword = () => import("@/page/user/rest-password")
 //布局
 const baseView = () => import("@/layout/base-view")
 const rightView = () => import("@/layout/right-content")
+const topHeader = () => import("@/layout/top-header")
 const routes = [
     {
         path: "/login", component: login
